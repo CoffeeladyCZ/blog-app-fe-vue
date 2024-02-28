@@ -3,7 +3,7 @@
  * Send as params whatever you might seem valuable to send.
  * The URL is probably a good start though.
  */
-export const trackPageview = (params) => {
+export const trackPageview = (params: URLSearchParams) => {
   console.log(`--> Tracking Pageview: ${params}`);
 };
 
@@ -12,6 +12,6 @@ export const trackPageview = (params) => {
  * Send as params whatever you might seem valuable to send.
  * The URL and an event name are probably a good start though.
  */
-export const trackEvent = (params) => {
+export const trackEvent = (params: URLSearchParams) => {
   console.log(`--> Tracking Event: ${params}`);
 };

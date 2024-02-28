@@ -9,12 +9,22 @@ const routes: RouterOptions["routes"] = [
   {
     path: "/article/:id",
     name: "Article",
-    component: () => import("../components/Article.vue"),
+    component: () => import("../views/ArticleDetail.vue"),
   },
   {
     path: "/article/:id/abtest",
     name: "ArticleABTest",
-    component: () => import("../components/ABTest.vue"),
+    component: () => import("../components/ArticleABTest.vue"),
+  },
+  {
+    path: "/articles",
+    name: "Articles",
+    component: () => import("../views/ArticleList.vue"),
+  },
+  {
+    path:"/ab-testing",
+    name: "ABTesting",
+    component: () => import("../views/ABTesting.vue"),
   }
 ];
 
