@@ -12,15 +12,9 @@ const items = ref([
         }
     },
     {
-        label: 'Programmatic',
-        command: () => {
-            router.push('/introduction');
-        }
-    },
-    {
         label: 'A/B Testing',
         command: () => {
-            router.push('/introduction');
+            router.push('/ab-testing');
         }
     },
 ]);
