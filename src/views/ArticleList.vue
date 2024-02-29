@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div v-if="articleList">
     <h1>Article List</h1>
     <div class="flex gap-5">
-      <template v-for="article in articleStore.articleList" :key="article.id">
+      <template v-for="(article) in articleVariant">
         <ArticleCard :article="article" button="Read" />
       </template>
     </div>
@@ -10,31 +10,33 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, computed, ref } from 'vue';
 
 import { useArticleStore } from '../store/articleStore';
-
 import ArticleCard from '../components/ArticleCard.vue';
-
-// const showVersionA = ref(Math.random() < 0.5);
-
-// const articleVariant = computed(() => {
-//   if (mockData.map((item) => item.ab_test)) {
-//     return mockData.find((item) => item.variants.find((version) => version === 'v1');
-//   }
-
-//   if (mockData.length !== undefined) {
-//     if (showVersionA.value) {
-//       return mockData.variants.find((item) => item.version === 'v1');
-//     }
-//     return mockData.find((item) => item.version === 'v2');
-//   }
-// });
+import { storeToRefs } from 'pinia';
 
 const articleStore = useArticleStore();
+const { articleList } = storeToRefs(articleStore);
+const version = ref<string | null>(null);
+
+const articleVariant = computed(() => {
+  if (articleList.value !== null && articleList !== undefined) {
+    const withAB =  articleList.value.filter((article) => article.ab_test !== null);
+
+
+    const selectedVersion = version.value || Math.random() < 0.5 ? 'test_variation' : 'control_variation';
+    const chosenVersion = withAB.filter((articleGroup) => articleGroup.version === selectedVersion);
+
+    localStorage.setItem('selectedVersion', selectedVersion);
+    const withoutAB = articleList.value.filter((article) => article.ab_test === null);
+    return [, ...chosenVersion, ...withoutAB];
+  }
+});
 
 onMounted(async () => {
   await articleStore.fetchArticles();
+  version.value = localStorage.getItem('selectedVersion') ?? null;
 });
 </script>
 

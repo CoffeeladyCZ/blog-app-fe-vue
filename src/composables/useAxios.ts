@@ -5,7 +5,7 @@ import { IArticleDetail } from "../types";
 
 export const useAxios = async <T>(
   url: string,
-  method: "GET" | "POST",
+  method: "GET" | "POST" | "PATCH",
   params:URLSearchParams | null,
   requestData: IArticleDetail | null,
 ) => {

@@ -1,8 +1,27 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import { useRouter } from 'vue-router';
+import { onMounted, ref } from 'vue';
+import { useAxios } from '../composables/useAxios';
 
 const router = useRouter();
+
+const isLoading = ref(false);
+
+// fake login for setting cookies
+const fetchLogin = async () => {
+    isLoading.value = true;
+    if (localStorage.getItem('login') === 'true') {
+        isLoading.value = false;
+        return;
+    }
+    await useAxios('/api/login/login', 'GET', null, null);
+    localStorage.setItem('login', 'true');
+    isLoading.value = false;
+  }
+
+onMounted(async () => {
+   await fetchLogin();
+});
 
 const items = ref([
     {
