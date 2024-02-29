@@ -1,20 +1,46 @@
+<template>
+  <div v-if="articleDetail">
+    <div class="article pa-8">
+      <div class="max-w-full mx-auto">
+        <PImage :src="articleDetail.image" alt="Article Image" class="mb-4"/>
+      </div>
+      <div class="flex justify-evenly">
+        <h1 class="text-2xl font-bold mb-2">{{ articleDetail.title }}</h1>
+      </div>
+      <p class="text-gray-600">{{ articleDetail.subtitle }}</p>
+      <PEditor
+        v-model="articleDetail.content"
+        editorStyle="height: 320px"
+        readonly
+        :pt="{ 
+          toolbar: { class: 'hidden' },
+          root: { class: 'bg-white-20 border-transparent' }
+        }"
+      />
+      <PButton label="Sign up for Blinkist" link @click="trackEvent(createParams('subscibe-button'))" />
+    </div>
+  </div>
+</template>
+
 <script lang="ts" setup>
 import { onMounted } from 'vue';
-import { MdEditor } from 'md-editor-v3';
-import 'md-editor-v3/lib/style.css';
 import { useRoute } from 'vue-router';
+import { storeToRefs } from 'pinia';
 
 import { useArticleStore } from '../store/articleStore';
 import { trackPageview, trackEvent } from '../utils/analytics-api';
 
-const { articleDetail, fetchArticleDetail } = useArticleStore();
+const { fetchArticleDetail } = useArticleStore();
+const articleStore = useArticleStore();
+const { articleDetail } = storeToRefs(articleStore);
+
 const route = useRoute();
 
 const createParams = (event: string | null) => {
   const params = new URLSearchParams();
   params.append('url', window.location.href);
-  params.append('article_id', articleDetail?.article_id ?? '');
-  params.append('version', articleDetail?.version ?? '');
+  params.append('article_id', articleDetail.value?.article_id ?? '');
+  params.append('version', articleDetail.value?.version ?? '');
   params.append('unique_id', localStorage.getItem('uniqueId') ?? '');
   params.append('event', event ?? '');
   return params;
@@ -23,24 +49,10 @@ const createParams = (event: string | null) => {
 onMounted(async () => {
   const id = route.params.id as string
   await fetchArticleDetail(id);
+
   trackPageview(createParams(null));
 });
 </script>
-
-<template>
-  <div v-if="articleDetail">
-    <div class="article pa-8">
-      <img :src="articleDetail.image" alt="Article Image" class="w-9/12 h-auto mb-4">
-      <div class="flex justify-evenly">
-        <h1 class="text-2xl font-bold mb-2">{{ articleDetail.title }}</h1>
-      </div>
-      <p class="text-gray-600">{{ articleDetail.subtitle }}</p>
-      <MdEditor v-model="articleDetail.content" language="en-US" />
-      <PButton label="Sign up for Blinkist" link @click="trackEvent(createParams('subscibe-button'))" />
-    </div>
-  </div>
-</template>
-
 
 <style scoped>
 .article {

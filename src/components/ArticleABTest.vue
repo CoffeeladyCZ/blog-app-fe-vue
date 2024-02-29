@@ -1,41 +1,92 @@
 <script lang="ts" setup>
-import { defineProps } from 'vue';
-import { MdEditor } from 'md-editor-v3';
-import 'md-editor-v3/lib/style.css';
+import { onMounted, ref } from 'vue';
 
-import { IArticleDetail } from '../types';
+const testingVariation = ref({
+  version: 'test_variation',
+  title: '',
+  subtitle: '',
+  content: '',
+});
 
-const props = defineProps<IArticleDetail>();
+const controlVariation = ref({
+  version: 'control_variation',
+  title: '',
+  subtitle: '',
+  content: '',
+});
+
+const submitVersions = () => {
+  // place for fetch data to API
+};
+
+onMounted(async () => {
+  //
+});
 </script>
 
 <template>
-    <p class="text-2xl font-medium">Control variation</p>
-    <PCard style="width: 50rem">
+  <div class="flex justify-content-between my-6">
+    <p class="text-3xl font-medium m-0">Set test variants</p>
+    <PButton label="Save" class="px-4" @click="submitVersions()" />
+  </div>
+    <p class="text-2xl font-base">Control variation</p>
+    <PCard class="mb-4 w-auto">
       <template #header>
-        <img alt="user header" :src="props.image" />
+        <img alt="image" src="https://primefaces.org/cdn/primevue/images/usercard.png" />
       </template>
       <template #title>
-        <h1 class="text-2xl font-bold mb-2">{{ props.title }}</h1>
-        <PButton label="A/B test" class="mr-2" />
+        <div class="my-4">
+          <PFloatLabel>
+            <PInputText v-model="controlVariation.title" class="col-12" />
+            <label>Title</label>
+          </PFloatLabel>
+        </div>
       </template>
-      <template #subtitle>{{ props.subtitle }}</template>
+      <template #subtitle>
+        <PFloatLabel>
+          <PTextarea v-model="controlVariation.subtitle" rows="5" cols="79" class="col-12" />
+          <label>Subtitle</label>
+        </PFloatLabel>      </template>
       <template #content>
-        <MdEditor v-model="props.content" language="en-US" />
+        <PEditor
+          v-model="controlVariation.content"
+          editorStyle="height: 320px"
+          class="my-3 col-12"
+          :pt="{ 
+            root: { class: 'bg-white-20 border-transparent' }
+          }"
+        />
       </template>      
     </PCard>
     <PDivider />
-    <p class="text-2xl font-medium">Testing variation</p>
-    <PCard style="width: 50rem">
+    <p class="text-2xl font-base">Testing variation</p>
+    <PCard class="mb-4 w-auto">
       <template #header>
-        <img alt="user header" :src="props.image" />
+        <PImage alt="image" src="https://primefaces.org/cdn/primevue/images/usercard.png" />
       </template>
       <template #title>
-        <h1 class="text-2xl font-bold mb-2">{{ props.title }}</h1>
-        <PButton label="A/B test" class="mr-2" />
+        <div class="my-4">
+          <PFloatLabel>
+            <PInputText v-model="testingVariation.title" class="col-12" />
+            <label>Title</label>
+          </PFloatLabel>
+        </div>
       </template>
-      <template #subtitle>{{ props.subtitle }}</template>
+      <template #subtitle>
+        <PFloatLabel>
+          <PTextarea v-model="testingVariation.subtitle" rows="5" cols="79" class="col-12" />
+          <label>Subtitle</label>
+        </PFloatLabel>
+      </template>
       <template #content>
-        <MdEditor v-model="props.content" language="en-US" />
+        <PEditor
+          v-model="testingVariation.content"
+          class="my-3 col-12"
+          editorStyle="height: 320px"
+          :pt="{ 
+            root: { class: 'bg-white-20 border-transparent' }
+          }"
+        />
       </template>      
     </PCard>
 </template>
