@@ -23,6 +23,7 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
+import { useCookies } from 'vue3-cookies';
 
 import { IArticleDetailItem } from '../types';
 import { useArticleStore } from '../store/articleStore';
@@ -32,6 +33,7 @@ import { createParams } from '../utils/utils';
 const props = defineProps<{ article?: IArticleDetailItem, button: string }>();
 const router = useRouter();
 const articleStore = useArticleStore();
+const { cookies } = useCookies();
 
 const setCurrentArticle = (data: IArticleDetailItem) => {
   if (props.button === 'AB Test') {
@@ -40,7 +42,7 @@ const setCurrentArticle = (data: IArticleDetailItem) => {
     router.push(`/article/${data.article_id}`);
   }
   articleStore.currentArticle = data;
-  const uniqueId = localStorage.getItem('uniqueId');
+  const uniqueId = cookies.get('uniqueId');
   if (data) {
     trackEvent(createParams(
       window.location.href,
