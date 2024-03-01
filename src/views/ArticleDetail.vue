@@ -12,9 +12,13 @@
         v-model="articleDetail.content"
         editorStyle="height: 320px"
         readonly
+        class="editor"
         :pt="{ 
           toolbar: { class: 'hidden' },
-          root: { class: 'bg-white-20 border-transparent' }
+          content: {
+            class: 'border-none',
+            style: { background: '#F8F9FA'}
+          }
         }"
       />
       <PButton label="Sign up for Blinkist" link @click="trackEvent(createParams('subscibe-button'))" />
@@ -62,5 +66,12 @@ onMounted(async () => {
   margin: 0 auto;
   padding: 20px;
 }
+
+.editor {
+  :global(.p-editor-container .p-editor-toolbar.ql-snow) {
+    border: none !important;
+  }
+}
+
+
 </style>
-../utils/analytics-api.js
