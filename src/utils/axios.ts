@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const mockHostName = "http://localhost:5000/";
+const mockHostName = import.meta.env.VITE_APP_API_URL;
 
 const axiosClient = axios.create({
   baseURL: mockHostName,
