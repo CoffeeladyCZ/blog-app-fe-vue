@@ -26,6 +26,7 @@
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
+import { useCookies } from "vue3-cookies";
 
 import { useArticleStore } from '../store/articleStore';
 import { trackPageview, trackEvent } from '../utils/analytics-api';
@@ -35,13 +36,14 @@ const articleStore = useArticleStore();
 const { articleDetail } = storeToRefs(articleStore);
 
 const route = useRoute();
+const { cookies } = useCookies();
 
 const createParams = (event: string | null) => {
   const params = new URLSearchParams();
   params.append('url', window.location.href);
   params.append('article_id', articleDetail.value?.article_id ?? '');
   params.append('version', articleDetail.value?.version ?? '');
-  params.append('unique_id', localStorage.getItem('uniqueId') ?? '');
+  params.append('unique_id', cookies.get('uniqueId') ?? '');
   params.append('event', event ?? '');
   return params;
 }
