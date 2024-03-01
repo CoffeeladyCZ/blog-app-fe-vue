@@ -58,4 +58,4 @@ Starting the project
 ```
 
 The demo project is deployed on Vercel and corresponds to the current state.
-#### [Demo project](link)
+#### [Demo project](https://ab-test-blog-fe.vercel.app/)
