@@ -6,7 +6,7 @@ This app is designed for conducting A/B tests, allowing you to compare different
 ## Tech Stack
 The app is created using the following technologies:
 
-- Front-end: Vue 3, Pinia, Axios
+- Front-end: Vue 3, Pinia, Axios, PrimeVue, PrimeFlex
 - Back-end: Node.js, Express
 - Database: MongoDB
 
@@ -59,3 +59,5 @@ Starting the project
 
 The demo project is deployed on Vercel and corresponds to the current state.
 #### [Demo project](https://ab-test-blog-fe.vercel.app/)
+
+Unfortunately backend doesn't work on Vercel. I just create mock file with article data.
