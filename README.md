@@ -8,7 +8,7 @@ The app is created using the following technologies:
 
 - Front-end: Vue 3, Pinia, Axios, PrimeVue, PrimeFlex
 - Back-end: Node.js, Express
-- Database: MongoDB
+- Database: MongoDB (on the MongoDB Atlas cloud)
 
 Ideally Nuxt would be used for SEO reasons, unfortunately Vue is used for time reasons. I would also use the i18n library for localization into multiple languages.
 
@@ -45,11 +45,11 @@ The user will see only one randomly selected variant in the list of articles, wh
 
 ## Usage
 
-You also need the backend part, which is [here](https://github.com/CoffeeladyCZ/ab-test-blog-be). Follow the instructions in the Readme.
+You also need the backend part, which is [here](https://github.com/CoffeeladyCZ/ab-test-blog-be). Follow the instructions in the Readme there.
 
 Here in the project you need to edit the package.json
 ```js
-   "start:server": "cd ../ab-test-blog-be && npm run devstart" - sets according to the location of your backend repo
+   "start:server": "cd ../ab-test-blog-be/api && npm run start" - sets according to the location of your backend repo
 ```
 
 Starting the project
@@ -59,5 +59,3 @@ Starting the project
 
 The demo project is deployed on Vercel and corresponds to the current state.
 #### [Demo project](https://ab-test-blog-fe.vercel.app/)
-
-Unfortunately backend doesn't work on Vercel. I just create mock file with article data.
