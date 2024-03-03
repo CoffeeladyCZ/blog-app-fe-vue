@@ -1,35 +1,3 @@
-<template>
-  <div v-if="articleDetail">
-    <div class="article pa-8">
-      <div class="max-w-full mx-auto px-3">
-        <PImage :src="articleDetail.image" alt="Article Image" class="mb-4"/>
-      </div>
-      <div class="flex justify-evenly">
-        <h1 class="text-2xl font-bold mb-2 px-3">{{ articleDetail.title }}</h1>
-      </div>
-      <p class="text-gray-600 px-3">{{ articleDetail.subtitle }}</p>
-      <PEditor
-        v-model="articleDetail.content"
-        editorStyle="height: 320px"
-        readonly
-        :pt="{ 
-          toolbar: { class: 'hidden' },
-          content: {
-            class: 'border-none',
-          },
-          root: { class: 'p-0' }
-        }"
-      />
-      <PButton
-        class="px-3"
-        label="Sign up for Blinkist"
-        link
-        @click="trackEvent(createParams('subscibe-button'))"
-      />
-    </div>
-  </div>
-</template>
-
 <script lang="ts" setup>
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
@@ -64,6 +32,38 @@ onMounted(async () => {
 });
 </script>
 
+<template>
+  <div v-if="articleDetail">
+    <div class="article pa-8">
+      <div class="mx-auto px-3">
+        <PImage :src="articleDetail.image" alt="Article Image" class="mb-4" imageClass="image"/>
+      </div>
+      <div class="flex justify-evenly">
+        <h1 class="text-2xl font-bold mb-2 px-3">{{ articleDetail.title }}</h1>
+      </div>
+      <p class="text-gray-600 px-3">{{ articleDetail.subtitle }}</p>
+      <PEditor
+        v-model="articleDetail.content"
+        editorStyle="height: 320px"
+        readonly
+        :pt="{ 
+          toolbar: { class: 'hidden' },
+          content: {
+            class: 'border-none',
+          },
+          root: { class: 'p-0' }
+        }"
+      />
+      <PButton
+        class="px-3"
+        label="Sign up for Blinkist"
+        link
+        @click="trackEvent(createParams('subscibe-button'))"
+      />
+    </div>
+  </div>
+</template>
+
 <style scoped>
 .article {
   max-width: 1000px;
@@ -75,5 +75,12 @@ onMounted(async () => {
   :global(.editor.ql-editor) {
     padding: 0 !important;
   }
+}
+</style>
+
+<style global>
+.image {
+  max-width: 100%;
+  width: 800px;
 }
 </style>

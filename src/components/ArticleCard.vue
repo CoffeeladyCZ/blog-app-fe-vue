@@ -4,7 +4,7 @@
         style="width: 25rem; overflow: hidden"
       >
         <template #header>
-            <img alt="user header" src="https://primefaces.org/cdn/primevue/images/usercard.png" />
+            <PImage alt="user header" imageClass="image" src="https://primefaces.org/cdn/primevue/images/usercard.png" />
         </template>
         <template #title>{{ props.article.title }}</template>
         <template #footer>
@@ -53,5 +53,11 @@ const setCurrentArticle = (data: IArticleDetailItem) => {
     ));
   }
 };
-
 </script>
+
+<style global>
+.image {
+  max-width: 100%;
+  width: 400px;
+}
+</style>
