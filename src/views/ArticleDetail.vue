@@ -1,27 +1,31 @@
 <template>
   <div v-if="articleDetail">
     <div class="article pa-8">
-      <div class="max-w-full mx-auto">
+      <div class="max-w-full mx-auto px-3">
         <PImage :src="articleDetail.image" alt="Article Image" class="mb-4"/>
       </div>
       <div class="flex justify-evenly">
-        <h1 class="text-2xl font-bold mb-2">{{ articleDetail.title }}</h1>
+        <h1 class="text-2xl font-bold mb-2 px-3">{{ articleDetail.title }}</h1>
       </div>
-      <p class="text-gray-600">{{ articleDetail.subtitle }}</p>
+      <p class="text-gray-600 px-3">{{ articleDetail.subtitle }}</p>
       <PEditor
         v-model="articleDetail.content"
         editorStyle="height: 320px"
         readonly
-        class="editor"
         :pt="{ 
           toolbar: { class: 'hidden' },
           content: {
             class: 'border-none',
-            style: { background: '#F8F9FA'}
-          }
+          },
+          root: { class: 'p-0' }
         }"
       />
-      <PButton label="Sign up for Blinkist" link @click="trackEvent(createParams('subscibe-button'))" />
+      <PButton
+        class="px-3"
+        label="Sign up for Blinkist"
+        link
+        @click="trackEvent(createParams('subscibe-button'))"
+      />
     </div>
   </div>
 </template>
@@ -68,10 +72,8 @@ onMounted(async () => {
 }
 
 .editor {
-  :global(.p-editor-container .p-editor-toolbar.ql-snow) {
-    border: none !important;
+  :global(.editor.ql-editor) {
+    padding: 0 !important;
   }
 }
-
-
 </style>
