@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "lint:fix": "eslint --fix",
-    "start:server": "cd ../ab-test-blog-be && npm run devstart",
+    "start:server": "cd ../ab-test-blog-be/api && npm run start",
     "start": "concurrently \"npm run dev\" \"npm run start:server\""
   },
   "dependencies": {

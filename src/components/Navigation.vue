@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import { onMounted, ref } from 'vue';
-import { useCookies } from 'vue3-cookies';
+import { useAxios } from '../composables/useAxios';
 
 const router = useRouter();
-const { cookies } = useCookies();
 
 const isLoading = ref(false);
 
@@ -12,15 +11,12 @@ const isLoading = ref(false);
 const fetchLogin = async () => {
     isLoading.value = true;
 
-    // TO-DO prepare for real login
-    // if (localStorage.getItem('login') === 'true') {
-    //     isLoading.value = false;
-    //     return;
-    // }
-    // await useAxios('/api/login/login', 'GET', null, null);
+    if (localStorage.getItem('login') === 'true') {
+        isLoading.value = false;
+        return;
+    }
+    await useAxios('/api/login/login', 'GET', null, null);
     
-    localStorage.setItem('login', 'true');
-    cookies.set('uniqueId', '1234567890'); // fake uniqueId
     isLoading.value = false;
   }
 
