@@ -58,7 +58,7 @@ const onSubmit = handleSubmit(async (values) => {
     <p class="text-2xl font-base">Control variation</p>
     <PCard class="mb-4 w-auto">
       <template #header>
-        <img alt="image" src="https://primefaces.org/cdn/primevue/images/usercard.png" />
+        <PImage alt="image" imageClass="image" src="https://primefaces.org/cdn/primevue/images/usercard.png" />
       </template>
       <template #subtitle>
         <div class="my-4 p-2">
@@ -100,7 +100,7 @@ const onSubmit = handleSubmit(async (values) => {
       <p class="text-2xl font-base">Testing variation</p>
       <PCard class="mb-4 w-auto">
         <template #header>
-          <PImage alt="image" src="https://primefaces.org/cdn/primevue/images/usercard.png" />
+          <PImage alt="image" imageClass="image" src="https://primefaces.org/cdn/primevue/images/usercard.png" />
         </template>
         <template #subtitle>
           <div class="my-4 p-2">
@@ -151,3 +151,11 @@ const onSubmit = handleSubmit(async (values) => {
   padding: 20px;
 }
 </style>
+
+<style global>
+.image {
+  max-width: 100%;
+  width: 800px;
+}
+</style>
+```

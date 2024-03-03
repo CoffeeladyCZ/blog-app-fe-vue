@@ -1,14 +1,3 @@
-<template>
-  <div v-if="articleList">
-    <h1>Article List</h1>
-    <div class="flex gap-5">
-      <template v-for="(article) in articleVariant">
-        <ArticleCard :article="article" button="Read" />
-      </template>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { onMounted, computed, ref } from 'vue';
 
@@ -40,3 +29,13 @@ onMounted(async () => {
 });
 </script>
 
+<template>
+  <div v-if="articleList">
+    <h1>Article List</h1>
+    <div class="flex gap-5 flex-wrap">
+      <template v-for="(article) in articleVariant">
+        <ArticleCard :article="article" button="Read" />
+      </template>
+    </div>
+  </div>
+</template>
