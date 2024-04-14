@@ -1,26 +1,41 @@
 import type { RouterOptions } from "vue-router";
 import NotFound from "../views/NotFound.vue";
+import ArticleList from "../views/ArticleList.vue";
+import ArticleDetail from "../views/ArticleDetail.vue";
+import ArticleEditForm from "../views/ArticleEditForm.vue";
+import ArticleAddForm from "../views/ArticleAddForm.vue";
+import ArticleABTest from "../components/ArticleABTest.vue";
 
 const routes: RouterOptions["routes"] = [
   {
     path: "/",
     name: "Home",
-    component: () => import("../views/ArticleList.vue"),
+    component: ArticleList,
   },
   {
     path: "/article/:id",
     name: "Article",
-    component: () => import("../views/ArticleDetail.vue"),
+    component: ArticleDetail,
   },
   {
     path: "/articles",
     name: "Articles",
-    component: () => import("../views/ArticleList.vue"),
+    component: ArticleList,
+  },
+  {
+    path: "/article/:id/edit",
+    name: "Edit article",
+    component: ArticleEditForm,
+  },
+  {
+    path: "/article/add",
+    name: "Add article",
+    component: ArticleAddForm,
   },
   {
     path:"/ab-testing",
     name: "ABTesting",
-    component: () => import("../components/ArticleABTest.vue"),
+    component: ArticleABTest,
   },
   {
     path: "/:catchAll(.*)",

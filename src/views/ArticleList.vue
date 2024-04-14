@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { onMounted, computed, ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useRouter } from 'vue-router';
 
 import { useArticleStore } from '../store/articleStore';
 import ArticleCard from '../components/ArticleCard.vue';
-import { storeToRefs } from 'pinia';
+import { URLS } from '../Urls';
 
 const articleStore = useArticleStore();
 const { articleList } = storeToRefs(articleStore);
+const router = useRouter();
+
 const version = ref<string | null>(null);
 
 const articleVariant = computed(() => {
@@ -31,7 +35,10 @@ onMounted(async () => {
 
 <template>
   <div v-if="articleList">
-    <h1>Article List</h1>
+    <div class="flex justify-content-between">
+      <h1 class="my-0">Article List</h1>
+      <PButton label="Add new article" @click="router.push(URLS.articleAddView())" />
+    </div>
     <div class="flex gap-5 flex-wrap">
       <template v-for="(article) in articleVariant">
         <ArticleCard :article="article" button="Read" />

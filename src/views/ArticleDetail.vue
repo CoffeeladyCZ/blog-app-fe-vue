@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useCookies } from "vue3-cookies";
 
@@ -12,6 +12,7 @@ const articleStore = useArticleStore();
 const { articleDetail } = storeToRefs(articleStore);
 
 const route = useRoute();
+const router = useRouter();
 const { cookies } = useCookies();
 
 const createParams = (event: string | null) => {
@@ -35,6 +36,13 @@ onMounted(async () => {
 <template>
   <div v-if="articleDetail">
     <div class="article pa-8">
+      <div class="flex justify-content-end my-4 mr-2">
+        <PButton 
+          class="px-3"
+          label="Edit article"
+          @click="router.push(`/article/${articleDetail?.article_id}/edit`);"
+        />
+      </div>
       <div class="mx-auto px-3">
         <PImage :src="articleDetail.image" alt="Article Image" class="mb-4" imageClass="image"/>
       </div>
@@ -56,7 +64,7 @@ onMounted(async () => {
       />
       <PButton
         class="px-3"
-        label="Sign up for Blinkist"
+        label="Sign up for newsletter"
         link
         @click="trackEvent(createParams('subscibe-button'))"
       />
