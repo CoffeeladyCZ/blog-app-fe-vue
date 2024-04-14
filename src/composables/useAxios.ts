@@ -1,13 +1,12 @@
 import { ref } from "vue";
 
 import axiosClient from "../utils/axios";
-import { IArticleDetail } from "../types";
 
 export const useAxios = async <T>(
   url: string,
-  method: "GET" | "POST" | "PATCH",
-  params:URLSearchParams | null,
-  requestData: IArticleDetail | null,
+  method: "GET" | "POST" | "PATCH" | "PUT" | "DELETE",
+  params: URLSearchParams | null,
+  requestData: T | null,
 ) => {
   const data = ref<T | null>(null);
   const isLoading = ref(true);

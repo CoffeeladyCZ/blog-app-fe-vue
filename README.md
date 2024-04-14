@@ -1,7 +1,9 @@
-# App for A/B testing
+# Blog app
 
 ## Description
-This app is designed for conducting A/B tests, allowing you to compare different versions of article to determine which one performs better. It provides a user-friendly interface for creating experiments, tracking metrics, and analyzing results.
+This app is basic blog application.
+
+Another function is A/B tests, allowing you to compare different versions of article to determine which one performs better. It provides a user-friendly interface for creating experiments, tracking metrics, and analyzing results.
 
 ## Tech Stack
 The app is created using the following technologies:
@@ -13,8 +15,12 @@ The app is created using the following technologies:
 Ideally Nuxt would be used for SEO reasons, unfortunately Vue is used for time reasons. I would also use the i18n library for localization into multiple languages.
 
 ## Description of the solution
-The application should contain several parts. A basic blog, a login part and a part for A/B testing. Here I will only describe the A/B testing functionality.
+
+The application should contain several parts. A basic blog, a login part and a part for A/B testing. 
 The user must first get consent for GDPR and then a unique uuid is set in a cookie in the browser. This uuid will be part of the params in the measurement code, due to the uniqueness of the visit measurement.
+
+### Blog feature
+The user can add and edit the article. Currently, it is not possible to add and modify an image, the API is not ready.
 
 ### Tracking
 
@@ -40,12 +46,13 @@ The user will see only one randomly selected variant in the list of articles, wh
 
 ## Future feature
 - Adding a login section. This would be solved by creating a JWT access token and a refresh token. The validity would be verified before sending the request and the user would be relogged in if necessary.
- - Adding localization to multiple languages and options to choose.
+ - Adding localization to multiple languages and options to choose (i18n).
  - Improve the design.
+ - Adding feature for change image and add more images.
 
 ## Usage
 
-You also need the backend part, which is [here](https://github.com/CoffeeladyCZ/ab-test-blog-be). Follow the instructions in the Readme there.
+You also need the backend part, which is [here](https://github.com/CoffeeladyCZ/ab-test-blog-be). Follow the instructions in the README there.
 
 Here in the project you need to edit the package.json
 ```js

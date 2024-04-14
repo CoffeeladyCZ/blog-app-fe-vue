@@ -14,7 +14,7 @@
                   severity="secondary"
                   outlined
                   class="w-full"
-                  @click="setCurrentArticle(props.article)"
+                  @click="setCurrentArticle(props.article!)"
                 />
             </div>
         </template>
@@ -46,7 +46,7 @@ const setCurrentArticle = (data: IArticleDetailItem) => {
   if (data) {
     trackEvent(createParams(
       window.location.href,
-      data.article_id,
+      data.article_id!,
       data.version || '',
       uniqueId ||  '',
       props.button === 'AB Test' ? 'ab-test' : 'read'

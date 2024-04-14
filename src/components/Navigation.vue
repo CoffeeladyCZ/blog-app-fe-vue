@@ -2,6 +2,7 @@
 import { useRouter } from 'vue-router';
 import { onMounted, ref } from 'vue';
 import { useAxios } from '../composables/useAxios';
+import { URLS } from '../Urls';
 
 const router = useRouter();
 
@@ -28,13 +29,13 @@ const items = ref([
     {
         label: 'Articles',
         command: () => {
-            router.push('/articles');
+            router.push(URLS.articleListView());
         }
     },
     {
         label: 'A/B Testing',
         command: () => {
-            router.push('/ab-testing');
+            router.push(URLS.abTestingView());
         }
     },
 ]);
@@ -50,11 +51,11 @@ const items = ref([
 >
       <template #item="{ item, props }" class="m-0 px-0">
           <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
-              <a v-ripple :href="href" v-bind="props.action" @click="navigate">
+              <a :ripple="true" :href="href" v-bind="props.action" @click="navigate">
                   <span class="ml-2">{{ item.label }}</span>
               </a>
           </router-link>
-          <a v-else v-ripple :href="item.url" :target="item.target" v-bind="props.action">
+          <a v-else :ripple="true" :href="item.url" :target="item.target" v-bind="props.action">
               <span class="ml-2">{{ item.label }}</span>
           </a>
       </template>
